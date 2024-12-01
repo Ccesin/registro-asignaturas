@@ -28,27 +28,29 @@ const FormularioAsignatura = () => {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
-  const newErrors = {};
-      if (!nombre) newErrors.nombre = 'El nombre es requerido';
-      if (!unidadesCredito || ((unidadesCredito <= 0)&&(unidadesCredito > 6))) newErrors.unidadesCredito = 'Las unidades de crédito deben ser un número positivo Menor o igual que 6';
-      if (!profesor) newErrors.profesor = 'El profesor es requerido';
-      if (!descripcion) newErrors.descripcion = 'La descripción es requerida';
-      if (!horario) newErrors.horario = 'El horario es requerido';
-      if (!aula || ((aula <= 0) && (aula > 30)) ) newErrors.aula = 'El aula es requerida y debe ser un número entre 1 y 30';
-      if (!prerrequisitos) newErrors.prerrequisitos = 'Los prerrequisitos son requeridos';
-      if (!cupoMaximo || ((cupoMaximo <= 0) && (cupoMaximo > 35)) ) newErrors.cupoMaximo = 'El cupo máximo debe ser un número positivo Menor o igual que 35';
-  return newErrors;
+    const newErrors = {};
+        if (!nombre) newErrors.nombre = 'El nombre es requerido';
+        if (!unidadesCredito || ((unidadesCredito <= 0) || (unidadesCredito > 6))) newErrors.unidadesCredito = 'Las unidades de crédito deben ser un número positivo Menor o igual que 6';
+        if (!profesor) newErrors.profesor = 'El profesor es requerido';
+        if (!descripcion) newErrors.descripcion = 'La descripción es requerida';
+        if (!horario) newErrors.horario = 'El horario es requerido';
+        if (!aula || ((aula <= 0) || (aula > 30)) ) newErrors.aula = 'El aula es requerida y debe ser un número entre 1 y 30';
+        if (!prerrequisitos) newErrors.prerrequisitos = 'Los prerrequisitos son requeridos';
+        if (!cupoMaximo || ((cupoMaximo <= 0) || (cupoMaximo > 35)) ) newErrors.cupoMaximo = 'El cupo máximo debe ser un número positivo Menor o igual que 35';
+    return newErrors;
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
-
+      
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+        setErrors(validationErrors);
+        return;
     }
-  
+
+    
     const nuevaAsignatura = {
       nombre,
       unidadesCredito,
@@ -85,7 +87,7 @@ const FormularioAsignatura = () => {
     setOpen(false);
   };
 
-  return (
+return (
     <Container maxWidth="sm">
       <Typography variant="h4" gutterBottom>
         Registro de Asignaturas
@@ -147,7 +149,7 @@ const FormularioAsignatura = () => {
               rows={4}
               value={descripcion}
               onChange={(e) => {
-                setDescripcion(e.target.value)
+                setDescripcion(e.target.value);
                 setErrors((prev) => ({ ...prev, descripcion: '' })); // Limpiar error al cambiar
               }}
               required
@@ -162,7 +164,7 @@ const FormularioAsignatura = () => {
               fullWidth
               value={horario}
               onChange={(e) => {
-                setHorario(e.target.value)
+                setHorario(e.target.value);
                 setErrors((prev) => ({ ...prev, horario: '' })); // Limpiar error al cambiar
               }}
               required
@@ -177,7 +179,7 @@ const FormularioAsignatura = () => {
               fullWidth
               value={aula}
               onChange={(e) => {
-                setAula(e.target.value)
+                setAula(e.target.value);
                 setErrors((prev) => ({ ...prev, aula: '' })); // Limpiar error al cambiar
               }}
               required
@@ -191,8 +193,8 @@ const FormularioAsignatura = () => {
               variant="outlined"
               fullWidth
               value={prerrequisitos}
-              onChange={( e) => {
-                setPrerrequisitos(e.target.value)
+              onChange={(e) => {
+                setPrerrequisitos(e.target.value);
                 setErrors((prev) => ({ ...prev, prerrequisitos: '' })); // Limpiar error al cambiar
               }}
               required
@@ -208,7 +210,7 @@ const FormularioAsignatura = () => {
               type="number"
               value={cupoMaximo}
               onChange={(e) => {
-                setCupoMaximo(e.target.value)
+                setCupoMaximo(e.target.value);
                 setErrors((prev) => ({ ...prev, cupoMaximo: '' })); // Limpiar error al cambiar
               }}
               required
